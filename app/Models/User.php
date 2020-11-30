@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -27,6 +29,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -40,4 +43,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function uploadAvatar($image)
+    {
+        $filename = $image->getClientOriginalName();
+
+        (new self())->deleteOldAvatar();
+
+        $image->storeAs('images', $filename, 'public');
+        auth()->user()->update(['avatar' => $filename]);
+    }
+
+    protected function deleteOldAvatar()
+    {
+        if ($this->avatar) {
+            Storage::delete('/public/images/' . auth()->user()->avatar);
+        }
+    }
 }
