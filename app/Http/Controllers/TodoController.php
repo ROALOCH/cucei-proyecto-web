@@ -11,7 +11,7 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::all();
-        return view('todos.index')->with(['todos' => $todos]);
+        return view('todos.index', compact('todos'));
     }
 
     public function create()
@@ -25,8 +25,9 @@ class TodoController extends Controller
         return redirect()->back()->with('message', 'Tarea Creada');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('todos.edit');
+        $todo = Todo::find($id);
+        return view('todos.edit', compact('todo'));
     }
 }

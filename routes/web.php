@@ -30,4 +30,4 @@ Route::get('/todos/create', [TodoController::class, 'create']);
 
 Route::post('/todos/create', [TodoController::class, 'store']);
 
-Route::get('/todos/edit', [TodoController::class, 'edit']);
+Route::get('/todos/{id}/edit', [TodoController::class, 'edit']);
