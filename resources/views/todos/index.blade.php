@@ -4,7 +4,7 @@
 
 <div class="flex justify-between border-b pb-4 px-10">
     <h1 class="text-2xl">Lista de Tareas</h1>
-    <a href="/todos/create" class="mx-5 py-2 text-blue cursor-pointer text-blue-400"><span class="fa fa-plus-circle"></span></a>
+    <a href="{{route('todo.create')}}" class="mx-5 py-2 cursor-pointer text-green-400"><span class="fa fa-plus-circle"></span></a>
 </div>
 
 <ul class="my-5">
@@ -20,12 +20,16 @@
         @else
         <p>{{$todo->title}}</p>
         @endif
+
         <div>
+
+            <a href="{{route('todo.edit', $todo->id)}}" class="cursor-pointer text-blue-400"><span class="fa fa-edit px-2"></span></a>
+
             <span class="fa fa-trash text-red-500 px-2 cursor-pointer" onclick="event.preventDefault(); 
             if(confirm('¿Estas seguro de eliminar la tarea?')){
                 document.getElementById('form-delete-{{$todo->id}}').submit()
             }" />
-            <form id="{{'form-delete-'.$todo->id}}" style="display:none" action="{{route('todo.delete', $todo->id)}}" method="POST">
+            <form id="{{'form-delete-'.$todo->id}}" style="display:none" action="{{route('todo.destroy', $todo->id)}}" method="POST">
                 @csrf
                 @method('delete')
             </form>

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,17 +23,7 @@ Auth::routes();
 
 // TODOS
 
-Route::get('/todos', [TodoController::class, 'index'])->name('todo.index');
-
-Route::get('/todos/create', [TodoController::class, 'create']);
-
-Route::post('/todos/create', [TodoController::class, 'store']);
-
-Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
-
-Route::patch('/todos/{todo}/update', [TodoController::class, 'update'])->name('todo.update');
-
-Route::delete('/todos/{todo}/delete', [TodoController::class, 'delete'])->name('todo.delete');
+Route::resource('/todo', TodoController::class);
 
 Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
 

@@ -10,5 +10,5 @@
 </form>
 <x-alert />
 
-<a href="/todos" class="mx-5 py-1 px-1 bg-white-400 cursor-pointer text-black border">Ver Tareas</a>
+<a href="{{route('todo.index')}}" class="mx-5 py-1 px-1 bg-white-400 cursor-pointer text-black border">Ver Tareas</a>
 @endsection

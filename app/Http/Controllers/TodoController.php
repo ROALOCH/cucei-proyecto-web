@@ -38,7 +38,7 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('message', 'Tarea Modificada');
     }
 
-    public function delete(Todo $todo)
+    public function destroy(Todo $todo)
     {
         $todo->delete();
         return redirect(route('todo.index'))->with('message', 'Tarea Eliminada');
