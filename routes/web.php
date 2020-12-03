@@ -23,8 +23,11 @@ Auth::routes();
 
 // TODOS
 
-Route::resource('/todo', TodoController::class);
+Route::middleware('auth')->group(function () {
 
-Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+    Route::resource('/todo', TodoController::class);
 
-Route::put('/todos/{todo}/incomplete', [TodoController::class, 'incomplete'])->name('todo.incomplete');
+    Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+
+    Route::put('/todos/{todo}/incomplete', [TodoController::class, 'incomplete'])->name('todo.incomplete');
+});
