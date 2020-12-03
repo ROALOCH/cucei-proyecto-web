@@ -38,6 +38,12 @@ class TodoController extends Controller
         return redirect(route('todo.index'))->with('message', 'Tarea Modificada');
     }
 
+    public function delete(Todo $todo)
+    {
+        $todo->delete();
+        return redirect(route('todo.index'))->with('message', 'Tarea Eliminada');
+    }
+
     public function complete(Todo $todo)
     {
         $todo->update(['completed' => true]);
