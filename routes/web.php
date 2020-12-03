@@ -24,10 +24,16 @@ Auth::routes();
 
 // TODOS
 
-Route::get('/todos', [TodoController::class, 'index']);
+Route::get('/todos', [TodoController::class, 'index'])->name('todo.index');
 
 Route::get('/todos/create', [TodoController::class, 'create']);
 
 Route::post('/todos/create', [TodoController::class, 'store']);
 
-Route::get('/todos/{id}/edit', [TodoController::class, 'edit']);
+Route::get('/todos/{todo}/edit', [TodoController::class, 'edit']);
+
+Route::patch('/todos/{todo}/update', [TodoController::class, 'update'])->name('todo.update');
+
+Route::put('/todos/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+
+Route::put('/todos/{todo}/incomplete', [TodoController::class, 'incomplete'])->name('todo.incomplete');
