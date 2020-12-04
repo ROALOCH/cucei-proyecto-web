@@ -26,9 +26,21 @@ class TodoController extends Controller
         return view('todos.create');
     }
 
+    public function show(Todo $todo)
+    {
+        return view('todos.show', compact('todo'));
+    }
+
     public function store(TodoCreateRequest $request)
     {
-        auth()->user()->todos()->create($request->all());
+        $todo = auth()->user()->todos()->create($request->all());
+
+        if ($request->step) {
+            foreach ($request->step as $step) {
+                $todo->steps()->create(['name' => $step]);
+            }
+        }
+
         return redirect(route('todo.index'))->with('message', 'Tarea Creada');
     }
 
@@ -46,6 +58,7 @@ class TodoController extends Controller
 
     public function destroy(Todo $todo)
     {
+        $todo->steps->each->delete();
         $todo->delete();
         return redirect(route('todo.index'))->with('message', 'Tarea Eliminada');
     }

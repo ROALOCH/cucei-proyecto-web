@@ -8,6 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>Tareas</title>
 </head>
+@livewireStyles
 
 <body>
     <div class="text-center flex justify-center pt-10">
@@ -15,6 +16,8 @@
             @yield('content')
         </div>
     </div>
+
+    @livewireScripts
 </body>
 
 </html>

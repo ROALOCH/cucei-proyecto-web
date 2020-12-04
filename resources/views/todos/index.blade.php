@@ -9,23 +9,24 @@
 
 <ul class="my-5">
     <x-alert />
-    @foreach ($todos as $todo)
+
+    @forelse ($todos as $todo)
     <li class="flex justify-between py-2 px-10">
         <div>
             @include('todos.complete-button')
         </div>
 
         @if($todo->completed)
-        <p class="line-through">{{$todo->title}}</p>
+        <a class="cursor-pointer line-through" href="{{route('todo.show', $todo->id)}}">{{$todo->title}}</a>
         @else
-        <p>{{$todo->title}}</p>
+        <a class="cursor-pointer" href="{{route('todo.show', $todo->id)}}">{{$todo->title}}</a>
         @endif
 
         <div>
 
-            <a href="{{route('todo.edit', $todo->id)}}" class="cursor-pointer text-blue-400"><span class="fa fa-edit px-2"></span></a>
+            <a href="{{route('todo.edit', $todo->id)}}" class="cursor-pointer text-blue-400"><span class="fa fa-pencil px-2"></span></a>
 
-            <span class="fa fa-trash text-red-500 px-2 cursor-pointer" onclick="event.preventDefault(); 
+            <span class="fa fa-times text-red-500 px-2 cursor-pointer" onclick="event.preventDefault(); 
             if(confirm('¿Estas seguro de eliminar la tarea?')){
                 document.getElementById('form-delete-{{$todo->id}}').submit()
             }" />
@@ -36,7 +37,9 @@
 
         </div>
     </li>
-    @endforeach
+    @empty
+    <p>No hay tareas que mostrar</p>
+    @endforelse
 </ul>
 
 @endsection
