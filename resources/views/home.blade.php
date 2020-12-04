@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @auth
             <div class="card">
                 <div class="card-header">{{ __('Configuración de Cuenta') }}</div>
 
@@ -27,8 +28,15 @@
                         <input type="submit" value="Enviar">
                     </form>
                 </div>
+                @endauth
+                @guest
+                <div class="card">
+                    <div class="card-body">
+                        <h5>TodoIt es una aplicación para que guardes tus tareas por hacer y no se te olvide nada! </h5>
+                    </div>
+                    @endguest
+                </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
